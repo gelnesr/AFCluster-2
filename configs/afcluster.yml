@@ -1,0 +1,18 @@
+keyword: "MAIN"           
+gap_cutoff: 0.5
+random_seed: 42
+
+cluster_method: "dbscan"
+
+dbscan:
+  min_samples: 5
+  eps_val: null           
+  min_eps: 0.5
+  max_eps: 5.0
+  eps_step: 0.25
+  scan_subsample: 2000    
+
+path_vars:
+  PATH: "/scratch/users/gelnesr/tools/localcolabfold/colabfold-conda/bin:$PATH"
+  XDG_CACHE_HOME: "/scratch/users/gelnesr/cache"
+  MPLCONFIGDIR: "/scratch/users/gelnesr/cache"
