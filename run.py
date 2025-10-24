@@ -16,7 +16,7 @@ def get_labels(args, df):
     if args.cluster_method == "dbscan":
         return cluster_DBSCAN(args, df)
     else:
-        raise ValueError(f"Unknown clusterer: {args.clusterer}")
+        raise ValueError(f"Unknown clustering method: {args.clusterer}")
 
 def run_cluster(args, subfolder, input):
     
