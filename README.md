@@ -64,9 +64,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
         "$IMG" bash -lc '
         cd /w
         source afc/bin/activate
-        python run.py --help
-        # example:
-        # python afcluster.py --input INPUT.fasta
+        python afcluster.py --input INPUT.fasta
         '
     ```
 
