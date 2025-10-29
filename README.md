@@ -1,4 +1,4 @@
-# AFCluster-2
+# AFCluster, but modular
 
 A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_Cluster) for plug-n-play functionality, incorporation into computational workflows, and HPC/HTC deployment through ColabFold.
 
