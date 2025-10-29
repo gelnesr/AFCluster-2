@@ -5,8 +5,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 ## Features
 
 - **Modular Design**: Clean separation of MSA generation, clustering, and structure prediction
-- **HPC-Ready**: SLURM integration for high-performance computing clusters
-- **HTC-Ready**: Coming soon!
+- **Slurm & Apptainer Compatibility**: Integration for high-performance and high-throughput computing clusters
 - **Modular MSA Clustering**: Additional clustering methods can be easily swapped in.
 
 ## Installation
@@ -37,10 +36,39 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
 3. **For HPC deployment, run the setup script:**
 
-    This will automatically set the path for ColabFold to your `$SCRATCH/tools` folder on HPC. Edit this line to the appropriate directory.. 
-   ```bash
-   bash scripts/setup_slurm.sh
+    This will automatically set up the enviornment and set the path for ColabFold to your `$SCRATCH/tools` folder. Edit this line in the .sh script to the appropriate directory. 
+    ```bash
+   bash scripts/setup.sh
    ```
+   **For Apptainer deployment, run the following set of commands.**
+   
+   First set up a .sif file to your `$SCRATCH/containers` folder and a cache directory at `$SCRATCH/cache`. Edit this line in the .sh script to the appropriate directory.
+   
+   ```bash
+   bash scripts/build_apptainer.sh
+   ```
+
+    Then, run this which will automatically set up the enviornment and set the path for ColabFold to your `$SCRATCH/tools` folder. Edit this line in the .sh script to the appropriate directory. 
+
+    ```bash
+   bash scripts/setup.sh
+   ```
+
+   Then run `module load apptainer` or `module load singularity` and run the following command:
+   
+   ```bash
+   apptainer exec --nv \
+        --bind "AFCluster-2:/w","$SCRATCH:$SCRATCH" \
+        --env XDG_CACHE_HOME="$CACHE" \
+        --env MPLCONFIGDIR="$CACHE" \
+        "$IMG" bash -lc '
+        cd /w
+        source afc/bin/activate
+        python run.py --help
+        # example:
+        # python run.py --input INPUT.FASTA
+        '
+    ```
 
 ## Usage
 
