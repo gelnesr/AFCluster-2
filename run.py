@@ -92,7 +92,6 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
 
     p.add_argument("--input", type=str, required=True, help="Input fasta")
-    p.add_argument("--keyword", type=str, default='MAIN')
     p.add_argument('--msa', type=str, default=None)
    
     args = p.parse_args()
@@ -102,10 +101,12 @@ if __name__ == "__main__":
     
     for k, v in cfg.items():
         setattr(args, k, v)
+    
     os.makedirs(args.outdir, exist_ok=True)
     os.makedirs(args.tmpdir, exist_ok=True)
 
     np.random.default_rng(seed=args.random_seed)
+    
     os.environ['PATH'] = args.path_vars['PATH']
     os.environ["XDG_CACHE_HOME"] = args.path_vars['XDG_CACHE_HOME']
     os.environ["MPLCONFIGDIR"] = args.path_vars['MPLCONFIGDIR']

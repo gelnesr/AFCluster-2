@@ -1,4 +1,4 @@
-# AFCluster-2
+# AFCluster, but modular
 
 A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_Cluster) for plug-n-play functionality, incorporation into computational workflows, and HPC/HTC deployment through ColabFold.
 
@@ -20,7 +20,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:gelnesr/AFCluster-2.git
    cd AFCluster-2
 
 2. **Set up ColabFold locally:**
@@ -80,6 +80,11 @@ Run the pipeline on a FASTA file:
 python run.py --input sequences.fasta
 ```
 
+## Parameters
+
+- `--input`: Input FASTA file (required)
+- `--msa`: Pre-computed MSA file (optional)
+
 ### Configuration
 
 Modify `configs/afcluster.yml` to adjust clustering parameters:
@@ -107,11 +112,11 @@ path_vars:
 ## Workflow
 
 1. **Input Processing**: Load FASTA sequences
-2. **MSA Generation**: Create multiple sequence alignments using MMseqs2
+2. **MSA Generation**: Create multiple sequence alignments using `colabfold_batch` or local MMSeqs
 3. **Sequence Filtering**: Remove sequences with high gap content
-4. **Clustering**: Group similar sequences using DBSCAN
+4. **Clustering**: Group similar sequences using specified method
 5. **Structure Prediction**: Run ColabFold on each cluster
-6. **Output**: Generate cluster-specific A3M files and predicted structures
+6. **Output**: Generate cluster-specific A3M files and predicted structures with corresponding json/png files
 
 ## Output Structure
 
@@ -130,29 +135,6 @@ output/
 │       │   └── ...
 │       └── ...
 ```
-
-## Parameters
-
-- `--input`: Input FASTA file (required)
-- `--msa`: Pre-computed MSA file (optional)
-- `--keyword`: Job identifier (default: 'MAIN')
-
-## Dependencies
-
-- **numpy**: Numerical computations
-- **pandas**: Data manipulation
-- **biopython**: Sequence processing
-- **scikit-learn**: Clustering algorithms
-- **tqdm**: Progress bars
-- **requests**: API communication
-- **pyyaml**: Configuration parsing
-
-## HPC Requirements
-
-- SLURM job scheduler
-- GPU access (for ColabFold)
-- Sufficient memory (40GB recommended)
-- ColabFold installation
 
 ## License
 
