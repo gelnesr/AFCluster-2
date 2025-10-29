@@ -21,7 +21,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:gelnesr/AFCluster-2.git
    cd AFCluster-2
 
 2. **Set up ColabFold locally:**
