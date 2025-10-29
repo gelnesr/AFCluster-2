@@ -38,7 +38,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
     This will automatically set up the enviornment and set the path for ColabFold to your `$SCRATCH/tools` folder. Edit this line in the .sh script to the appropriate directory. 
     ```bash
-   bash scripts/setup.sh
+   bash scripts/env_setup.sh
    ```
    **For Apptainer deployment, run the following set of commands.**
    
@@ -51,10 +51,10 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
     Then, run this which will automatically set up the enviornment and set the path for ColabFold to your `$SCRATCH/tools` folder. Edit this line in the .sh script to the appropriate directory. 
 
     ```bash
-   bash scripts/setup.sh
+   bash scripts/env_setup.sh
    ```
 
-   Then run `module load apptainer` or `module load singularity` and run the following command:
+   Then run `module load apptainer` or `module load singularity` to initialize an apptainer. You should set the `INPUT.fasta` in the command below before running:
    
    ```bash
    apptainer exec --nv \
@@ -66,9 +66,11 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
         source afc/bin/activate
         python run.py --help
         # example:
-        # python run.py --input INPUT.FASTA
+        # python afcluster.py --input INPUT.fasta
         '
     ```
+
+    ****
 
 ## Usage
 
@@ -77,7 +79,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 Run the pipeline on a FASTA file:
 
 ```bash
-python run.py --input sequences.fasta
+python afcluster.py --input sequences.fasta
 ```
 
 ## Parameters
