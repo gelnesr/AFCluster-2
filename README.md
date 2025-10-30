@@ -25,7 +25,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
 2. **Set up ColabFold locally:**
    
-   If you do not already have ColabFold isntalled, please follow the installation instructions from [localcolabfold](https://github.com/YoshitakaMo/localcolabfold):
+   If you do not already have ColabFold installed, please follow the installation instructions from [localcolabfold](https://github.com/YoshitakaMo/localcolabfold):
    
    ```bash
    # For Linux
