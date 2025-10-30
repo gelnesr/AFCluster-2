@@ -18,8 +18,8 @@ def get_labels(args, df):
     raise ValueError(f"Unknown clustering method")
 
 def run_cluster(args, subfolder, input):
-    
-    with open(f"{args.keyword}.log", "w") as f:
+
+    with open(f"{subfolder}/{args.keyword}.log", "w") as f:
         IDs, seqs_incl_del = load_fasta(input)
         seqs = clean_seqs(seqs_incl_del)
 
@@ -28,10 +28,12 @@ def run_cluster(args, subfolder, input):
         df = df.iloc[1:]
         L = len(df.sequence.iloc[0])
         df['frac_gaps'] = [x.count('-') / L for x in df['sequence']]
-        df = df.loc[df.frac_gaps < args.gap_cutoff]
+
+        df = df.loc[df.frac_gaps < float(args.gap_cutoff)]
         f.write(f"Filtered sequences by gap_cutoff={args.gap_cutoff}\n")
         
         df, clusters = get_labels(args, df)
+
         f.write(f"Found {len(clusters)} clusters using {args.cluster_method}\n")
 
         cluster_dir = os.path.join(subfolder, "clusters",)
@@ -42,7 +44,7 @@ def run_cluster(args, subfolder, input):
             outpath = os.path.join(cluster_dir, f"{args.keyword}_{clust:03d}.a3m")
             write_fasta(out.SequenceName.tolist(), out.seq_incl_del.tolist(), outfile=outpath)
             f.write(f"Wrote {outpath} (n={len(out)})\n")
-    os.remove(f"{args.keyword}.log")
+    os.remove(f"{subfolder}/{args.keyword}.log")
 
 def main(args):
     ids, seqs = load_fasta(args.input); print(ids)
@@ -101,7 +103,7 @@ if __name__ == "__main__":
     
     for k, v in cfg.items():
         setattr(args, k, v)
-    
+
     os.makedirs(args.outdir, exist_ok=True)
     os.makedirs(args.tmpdir, exist_ok=True)
 

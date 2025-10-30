@@ -1,2 +1,3 @@
 filehandling.py
 make_sbatch.py
+input/*.fa
