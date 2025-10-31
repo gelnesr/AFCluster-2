@@ -164,7 +164,7 @@ This software builds upon the following tools and methods:
 **ColabFold** - Mirdita, M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all. *Nat Methods* 19, 679–682 (2022). https://doi.org/10.1038/s41592-022-01488-1  
 [[GitHub](https://github.com/sokrypton/ColabFold)] | [[Local Installation](https://github.com/YoshitakaMo/localcolabfold)]
 
-**MMseqs2** - Steinegger, M. & Söding, J. MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets. *Nat Biotechnol* 35, 1026–1028 (2017). https://doi.org/10.1038/nbt.3981
+**MMseqs2** - Steinegger, M. & Söding, J. MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets. *Nat Biotechnol* 35, 1026–1028 (2017). https://www.nature.com/articles/nbt.3988
 [[GitHub](https://github.com/soedinglab/MMseqs2)]
 
 **AlphaFold** - Jumper, J., Evans, R., Pritzel, A. et al. Highly accurate protein structure prediction with AlphaFold. *Nature* 596, 583–589 (2021). https://doi.org/10.1038/s41586-021-03819-2
