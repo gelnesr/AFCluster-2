@@ -145,7 +145,7 @@ This project is based on the original [AF-Cluster](https://github.com/HWaymentSt
 If you use AFCluster-2 in your research, please cite the following works and acknowledge this implementation:
 
 ```bibtex
-@article{Wayment-Steele_Ojoawo_Otten_Apitz_Pitsawong_Hömberger_Ovchinnikov_Colwell_Kern_2023,
+@article{AFCluster,
   title={Predicting multiple conformations via sequence clustering and AlphaFold2},
   DOI={10.1038/s41586-023-06832-9},
   journal={Nature},
