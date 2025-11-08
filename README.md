@@ -40,7 +40,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
     ```bash
    bash scripts/env_setup.sh
    ```
-   **For Apptainer deployment, run the following set of commands.**
+4. **For Apptainer deployment, run the following set of commands.**
    
    First set up a .sif file to your `$SCRATCH/containers` folder and a cache directory at `$SCRATCH/cache`. Edit this line in the .sh script to the appropriate directory.
    
