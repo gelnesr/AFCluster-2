@@ -17,7 +17,7 @@ afcluster:
   num_seeds: 4
   use_dropout: True
   amber: False
-  templates: True
+  templates: False
   num_recycle: 3
   num_relax: 0
   
