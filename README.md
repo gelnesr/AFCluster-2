@@ -25,7 +25,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
 
 2. **Set up ColabFold locally:**
    
-   If you do not already have ColabFold isntalled, please follow the installation instructions from [localcolabfold](https://github.com/YoshitakaMo/localcolabfold):
+   If you do not already have ColabFold installed, please follow the installation instructions from [localcolabfold](https://github.com/YoshitakaMo/localcolabfold):
    
    ```bash
    # For Linux
@@ -40,7 +40,7 @@ A modular reimplementation of [AF-Cluster](https://github.com/HWaymentSteele/AF_
     ```bash
    bash scripts/env_setup.sh
    ```
-   **For Apptainer deployment, run the following set of commands.**
+4. **For Apptainer deployment, run the following set of commands.**
    
    First set up a .sif file to your `$SCRATCH/containers` folder and a cache directory at `$SCRATCH/cache`. Edit this line in the .sh script to the appropriate directory.
    
@@ -145,7 +145,7 @@ This project is based on the original [AF-Cluster](https://github.com/HWaymentSt
 If you use AFCluster-2 in your research, please cite the following works and acknowledge this implementation:
 
 ```bibtex
-@article{Wayment-Steele_Ojoawo_Otten_Apitz_Pitsawong_Hömberger_Ovchinnikov_Colwell_Kern_2023,
+@article{AFCluster,
   title={Predicting multiple conformations via sequence clustering and AlphaFold2},
   DOI={10.1038/s41586-023-06832-9},
   journal={Nature},
@@ -164,7 +164,7 @@ This software builds upon the following tools and methods:
 **ColabFold** - Mirdita, M., Schütze, K., Moriwaki, Y. et al. ColabFold: making protein folding accessible to all. *Nat Methods* 19, 679–682 (2022). https://doi.org/10.1038/s41592-022-01488-1  
 [[GitHub](https://github.com/sokrypton/ColabFold)] | [[Local Installation](https://github.com/YoshitakaMo/localcolabfold)]
 
-**MMseqs2** - Steinegger, M. & Söding, J. MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets. *Nat Biotechnol* 35, 1026–1028 (2017). https://doi.org/10.1038/nbt.3981  
+**MMseqs2** - Steinegger, M. & Söding, J. MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets. *Nat Biotechnol* 35, 1026–1028 (2017). https://www.nature.com/articles/nbt.3988
 [[GitHub](https://github.com/soedinglab/MMseqs2)]
 
 **AlphaFold** - Jumper, J., Evans, R., Pritzel, A. et al. Highly accurate protein structure prediction with AlphaFold. *Nature* 596, 583–589 (2021). https://doi.org/10.1038/s41586-021-03819-2
