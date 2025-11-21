@@ -65,8 +65,12 @@ def run_cluster(args, subfolder, input):
     os.remove(f"{subfolder}/{args.keyword}.log")
 
 def main(args):
-    ids, seqs = load_fasta(args.input); print(ids)
-    
+    if args.input is not None:
+        ids, seqs = load_fasta(args.input);
+        print(seqs, ids)
+    if args.seq is not None:
+        seqs = [args.seq]
+        ids = [args.jobid]
     if args.msa is not None and len(ids) > 0:
         print(f'Assuming ID associated with input MSA is {id[0]}.')
         subfolder = os.path.join(args.outdir, ids[0])
@@ -79,7 +83,6 @@ def main(args):
         subfolder = os.path.join(args.outdir, id_)
         os.makedirs(subfolder, exist_ok=True)
         msa_file = os.path.join(subfolder, f'{id_}.a3m')
-
         print(f'Running generating MSA...')
         if not os.path.exists(msa_file): 
             msa_seqs = run_mmseqs(seq_, args.tmpdir)
@@ -103,16 +106,19 @@ def main(args):
                 run_command.extend(['--random-seed', f'{i}'])
                 run_command.extend(['--jobname-prefix', f'{fil_name}'])
                 run_command.extend([f'{fil}', f'{pred_dir}/{fil_name}/s{i}'])
-                print(run_command)
                 subprocess.run(run_command, shell=False)
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
 
-    p.add_argument("--input", type=str, required=True, help="Input fasta")
-    p.add_argument('--msa', type=str, default=None)
-   
+    p.add_argument("--input", type=str, default=None, help="Input fasta")
+    p.add_argument('--msa', type=str, default=None, help='Initial input MSA')
+    p.add_argument('--seq', type=str, default=None, help='Initial input sequence')
+    p.add_argument('--jobid', type=str, default='default')
     args = p.parse_args()
+
+    if args.input is None and args.msa is None and args.seq is None:
+        exit('Must specify either input or MSA or sequence')
     
     with open('configs/afcluster.yml', "r") as f:
         cfg = yaml.safe_load(f)

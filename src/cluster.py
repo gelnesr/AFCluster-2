@@ -8,6 +8,8 @@ def cluster_DBSCAN(args, df):
     L = len(df.sequence.iloc[0])
     n_clusters=[]
     ohe_seqs = encode_seqs(df.sequence.tolist(), max_len=L)
+    if len(df.sequence) < int(dbscan.min_samples):
+        exit('Not enough sequences in MSA compared to min_samples. Exiting...')
     if dbscan.eps_val is None:
         eps_test_vals = np.arange(dbscan.min_eps, dbscan.max_eps + dbscan.eps_step, dbscan.eps_step)
         for eps in eps_test_vals:
