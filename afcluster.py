@@ -11,11 +11,29 @@ from src.cluster import *
 from src.utils.msa import *
 from src.utils.seqs import *
 from src.utils.mmseqs import *
+from src.utils.helpers import *
 
 def get_labels(args, df):
     if args.cluster_method == "dbscan":
         return cluster_DBSCAN(args, df)
     raise ValueError(f"Unknown clustering method")
+
+
+def generate_command(args):
+    run_command = ['colabfold_batch']
+    afcluster = dict_to_namespace(args.afcluster)
+    if afcluster.amber:
+        run_commmand.extend(['--amber'])
+        if torch.cuda.is_available():
+            run_command.extend(['--use-gpu-relax'])
+        run_command.extend(['--num-relax', f'{afcluster.num_relax}'])
+    if afcluster.use_dropout:
+        run_command.extend(['--use-dropout'])
+    run_command.extend(['--num-recycle', f'{afcluster.num_recycle}'])
+    if afcluster.templates:
+        run_command.extend(['--templates'])
+    return run_command
+
 
 def run_cluster(args, subfolder, input):
 
@@ -78,17 +96,15 @@ def main(args):
             for fil in glob.glob(f"{subfolder}/clusters/*.a3m"):
                 fil_name = fil.split('/')[-1].strip('.a3m')
                 os.makedirs(f'{pred_dir}/{fil_name}/s{i}', exist_ok=True)
-                print(fil_name)
+
                 if os.path.exists(f'{pred_dir}/{fil_name}/s{i}/{fil_name}_0.done.txt'):
                     continue
-                subprocess.run(['colabfold_batch', 
-                                    #'--amber', 
-                                    '--use-dropout', 
-                                    '--num-recycle', '3', 
-                                    #'--use-gpu-relax', 
-                                    '--random-seed', f'{i}', 
-                                    '--jobname-prefix', f'{fil_name}',
-                                    f'{fil}', f'{pred_dir}/{fil_name}/s{i}'])
+                run_command = generate_command(args)
+                run_command.extend(['--random-seed', f'{i}'])
+                run_command.extend(['--jobname-prefix', f'{fil_name}'])
+                run_command.extend([f'{fil}', f'{pred_dir}/{fil_name}/s{i}'])
+                print(run_command)
+                subprocess.run(run_command, shell=False)
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()

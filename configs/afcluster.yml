@@ -13,6 +13,14 @@ dbscan:
   max_eps: 20.0
   eps_step: 0.5 
 
+afcluster:
+  num_seeds: 4
+  use_dropout: True
+  amber: False
+  templates: True
+  num_recycle: 3
+  num_relax: 0
+  
 path_vars:
   PATH: "/scratch/users/gelnesr/tools/localcolabfold/colabfold-conda/bin:$PATH" # path to colabfold
   XDG_CACHE_HOME: "/scratch/users/gelnesr/cache" # path to xdg cache  
