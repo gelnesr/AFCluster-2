@@ -119,13 +119,14 @@ if __name__ == "__main__":
     p.add_argument("--input", type=str, default=None, help="Input fasta")
     p.add_argument('--msa', type=str, default=None, help='Initial input MSA')
     p.add_argument('--seq', type=str, default=None, help='Initial input sequence')
+    p.add_argument('--config', type=str, default='configs/afcluster.yml', help='Initial config')
     p.add_argument('--jobid', type=str, default='default')
     args = p.parse_args()
 
     if args.input is None and args.msa is None and args.seq is None:
         exit('Must specify either input or MSA or sequence')
     
-    with open('configs/afcluster.yml', "r") as f:
+    with open(args.config, "r") as f:
         cfg = yaml.safe_load(f)
     
     for k, v in cfg.items():
