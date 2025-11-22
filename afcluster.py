@@ -1,6 +1,7 @@
 import os
 import sys
 import glob
+import copy
 import yaml
 import argparse
 import subprocess
@@ -19,9 +20,11 @@ def get_labels(args, df):
     raise ValueError(f"Unknown clustering method")
 
 
-def generate_command(args):
+def generate_command(args, return_seeds=False):
     run_command = ['colabfold_batch']
     afcluster = dict_to_namespace(args.afcluster)
+    if return_seeds:
+        return afcluster.num_seeds
     if afcluster.amber:
         run_commmand.extend(['--amber'])
         if torch.cuda.is_available():
@@ -67,7 +70,6 @@ def run_cluster(args, subfolder, input):
 def main(args):
     if args.input is not None:
         ids, seqs = load_fasta(args.input);
-        print(seqs, ids)
     if args.seq is not None:
         seqs = [args.seq]
         ids = [args.jobid]
@@ -83,6 +85,7 @@ def main(args):
         subfolder = os.path.join(args.outdir, id_)
         os.makedirs(subfolder, exist_ok=True)
         msa_file = os.path.join(subfolder, f'{id_}.a3m')
+        
         print(f'Running generating MSA...')
         if not os.path.exists(msa_file): 
             msa_seqs = run_mmseqs(seq_, args.tmpdir)
@@ -95,13 +98,15 @@ def main(args):
         print(f'Running structure prediction...')
         pred_dir = os.path.join(subfolder, 'preds')
         os.makedirs(pred_dir, exist_ok=True)
-        for i in np.arange(0, args.num_seeds):
+        seeds = generate_command(args, return_seed=True)
+        for i in np.arange(0, seeds):
             for fil in glob.glob(f"{subfolder}/clusters/*.a3m"):
                 fil_name = fil.split('/')[-1].strip('.a3m')
                 os.makedirs(f'{pred_dir}/{fil_name}/s{i}', exist_ok=True)
 
                 if os.path.exists(f'{pred_dir}/{fil_name}/s{i}/{fil_name}_0.done.txt'):
                     continue
+
                 run_command = generate_command(args)
                 run_command.extend(['--random-seed', f'{i}'])
                 run_command.extend(['--jobname-prefix', f'{fil_name}'])
