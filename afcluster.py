@@ -95,7 +95,7 @@ def main(args):
         print(f'Running structure prediction...')
         pred_dir = os.path.join(subfolder, 'preds')
         os.makedirs(pred_dir, exist_ok=True)
-        for i in [0, 1, 2, 3]:
+        for i in np.arange(0, args.num_seeds):
             for fil in glob.glob(f"{subfolder}/clusters/*.a3m"):
                 fil_name = fil.split('/')[-1].strip('.a3m')
                 os.makedirs(f'{pred_dir}/{fil_name}/s{i}', exist_ok=True)

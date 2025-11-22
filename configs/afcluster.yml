@@ -1,6 +1,7 @@
 keyword: "MAIN"           
 gap_cutoff: 0.25
 random_seed: 42
+num_seeds: 4
 outdir: "/scratch/users/gelnesr/afcluster" # output directory
 tmpdir: "/scratch/users/gelnesr/tmp/msas" # temporary directory for msas
 
