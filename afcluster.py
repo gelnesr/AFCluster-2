@@ -98,7 +98,7 @@ def main(args):
         print(f'Running structure prediction...')
         pred_dir = os.path.join(subfolder, 'preds')
         os.makedirs(pred_dir, exist_ok=True)
-        seeds = generate_command(args, return_seed=True)
+        seeds = generate_command(args, return_seeds=True)
         for i in np.arange(0, seeds):
             for fil in glob.glob(f"{subfolder}/clusters/*.a3m"):
                 fil_name = os.path.splitext(os.path.basename(fil))[0]                
