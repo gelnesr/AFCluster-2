@@ -101,9 +101,8 @@ def main(args):
         seeds = generate_command(args, return_seed=True)
         for i in np.arange(0, seeds):
             for fil in glob.glob(f"{subfolder}/clusters/*.a3m"):
-                fil_name = fil.split('/')[-1].strip('.a3m')
+                fil_name = os.path.splitext(os.path.basename(fil))[0]                
                 os.makedirs(f'{pred_dir}/{fil_name}/s{i}', exist_ok=True)
-
                 if os.path.exists(f'{pred_dir}/{fil_name}/s{i}/{fil_name}_0.done.txt'):
                     continue
 
