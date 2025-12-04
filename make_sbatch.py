@@ -20,7 +20,7 @@ for file_ in glob.glob('/scratch/users/gelnesr/RelaxDB/fasta/*.fasta'):
     file_new.write(f'#SBATCH --gpu_cmode=shared\n') 
     file_new.write(f'ml gcc/12.4.0\n')
     file_new.write(f'bash scripts/setup_slurm.sh\n')
-    file_new.write(f'python run.py --input {file_}')
+    file_new.write(f'python afcluster.py --input {file_}')
     file_new.close()
     subprocess.run(["sbatch", f'/scratch/users/gelnesr/tmp/afc/sbatch/{file_name}.sbatch'])
 
